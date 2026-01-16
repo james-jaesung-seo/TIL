@@ -18,12 +18,33 @@ Run the following command and enter the target **PG ID** (e.g., `40.bec`) when p
 ```bash
 date; read -p "Enter PG ID: " pgid && \
 json=$(sudo ceph pg dump pgs --format=json) && \
-dump_info=$(echo "$json" | jq -r --arg pgid "$pgid" '.pg_stats[] | select(.pgid == $pgid) | ["--- PG Dump Info ---", "PGID: \(.pgid)", "State: \(.state)", "Objects: \(.stat_sum.num_objects // 0)", "Scrubbed: \(.objects_scrubbed // 0)", "Progress: " + (if (.stat_sum.num_objects // 0) > 0 then (((.objects_scrubbed // 0) / (.stat_sum.num_objects // 1)) * 100 | floor | tostring + "%") else "0%" end), "Last Scrub: \(.last_scrub_stamp // "N/A")"] | .[]') && \
+dump_info=$(echo "$json" | jq -r --arg pgid "$pgid" '
+  .pg_stats[] | select(.pgid == $pgid) | 
+  [
+    "--- PG Dump Info ---", 
+    "PGID: \(.pgid)", 
+    "State: \(.state)", 
+    "Objects: \(.stat_sum.num_objects // 0)", 
+    "Scrubbed: \(.objects_scrubbed // 0)", 
+    "Progress: " + (if (.stat_sum.num_objects // 0) > 0 then (((.objects_scrubbed // 0) / (.stat_sum.num_objects // 1)) * 100 | floor | tostring + "%") else "0%" end), 
+    "Last Scrub: \(.last_scrub_stamp // "N/A")"
+  ] | .[]
+') && \
 echo -e "$dump_info" && \
 schedule=$(echo "$json" | jq -r --arg pgid "$pgid" '.pg_stats[] | select(.pgid == $pgid) | .scrub_schedule // "N/A"') && \
-if [[ "$schedule" =~ ([0-9]+)s$ ]]; then seconds=${BASH_REMATCH[1]}; printf "Schedule: %s (%dd %dh %dm %ds)\n" "$schedule" "$((seconds/86400))" "$((seconds%86400/3600))" "$((seconds%3600/60))" "$((seconds%60))"; else echo "Schedule: $schedule"; fi && \
+if [[ "$schedule" =~ ([0-9]+)s$ ]]; then 
+  seconds=${BASH_REMATCH[1]}
+  printf "Schedule: %s (%dd %dh %dm %ds)\n" "$schedule" "$((seconds/86400))" "$((seconds%86400/3600))" "$((seconds%3600/60))" "$((seconds%60))"
+else 
+  echo "Schedule: $schedule"
+fi && \
 echo -e "\n--- PG Query Info ---" && \
-sudo ceph pg "$pgid" query --format=json | jq -r '"State: \(.state)\nActing Primary: osd.\(.info.stats.acting_primary)\nScrub Active: \(.scrubber.active)\nWaiting on OSDs: \(.scrubber.waiting_on_whom // [])"'
+sudo ceph pg "$pgid" query --format=json | jq -r '
+  "State: \(.state)\n" +
+  "Acting Primary: osd.\(.info.stats.acting_primary)\n" +
+  "Scrub Active: \(.scrubber.active)\n" +
+  "Waiting on OSDs: \(.scrubber.waiting_on_whom // [])"
+'
 ```
 
 ## 3. Output Description
