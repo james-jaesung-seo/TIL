@@ -4,8 +4,8 @@
 ---
 
 ## 📂 Ceph
-- [[Snippet] Inspect Specific PG Scrub Status && Schedule](til/Ceph/Inspect specific PG scrub status.md)
+- [[Snippet] Inspect Specific PG Scrub Status & Schedule](til/Ceph/Inspect specific PG scrub status.md)
 - [[Snippet] Monitor Active Deep Scrubbing (Real-time)](til/Ceph/Monitor active deep scrubbing.md)
 
 ---
-*Last updated: Fri Jan 16 02:27:09 UTC 2026*
+*Last updated: Fri Jan 16 02:29:33 UTC 2026*

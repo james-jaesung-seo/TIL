@@ -1,5 +1,5 @@
 ---
-title: "[Snippet] Inspect Specific PG Scrub Status && Schedule"
+title: "[Snippet] Inspect Specific PG Scrub Status & Schedule"
 public: true
 ---
 
