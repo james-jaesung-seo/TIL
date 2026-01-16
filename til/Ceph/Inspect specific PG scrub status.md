@@ -41,17 +41,6 @@ The output is divided into two sections: Dump Info (General Stats) and Query Inf
 | | **Scrub Active** | `true` if the scrubber is actively running, `false` otherwise. |
 | | **Waiting on OSDs** | List of OSDs that are delaying the scrub (Key for debugging stuck scrubs). |
 
-Section,Field,Description
-Dump Info,PGID,The target Placement Group ID entered.
-,State,"Current state of the PG (e.g., active+clean)."
-,Objects,Total number of objects in this PG.
-,Scrubbed,Number of objects verified in the current cycle.
-,Progress,Verification progress (Scrubbed / Objects * 100).
-,Last Scrub,Timestamp of the last completed scrub.
-,Schedule,"Next scheduled scrub time or status (e.g., queued for scrub)."
-Query Info,Acting Primary,The primary OSD responsible for coordinating the scrub.
-,Scrub Active,"true if scrubbing is currently running, false otherwise."
-,Waiting on OSDs,List of OSDs that act set is waiting for (crucial for debugging stuck scrubs).
 ## 4. Sample Output
 ```bash
 Fri Jan 16 02:07:20 AM UTC 2026
@@ -72,3 +61,4 @@ State: active+clean
 Acting Primary: osd.72
 Scrub Active: false
 Waiting on OSDs: []
+```
