@@ -49,6 +49,7 @@ sudo ceph pg "$pgid" query --format=json | jq -r '
 
 ## 3. Output Description
 The output is divided into two sections: Dump Info (General Stats) and Query Info (Internal State).
+
 | Section | Field | Description |
 | :--- | :--- | :--- |
 | **PG Dump Info** | **PGID** | The target Placement Group ID entered (e.g., `40.bec`). |
@@ -63,6 +64,7 @@ The output is divided into two sections: Dump Info (General Stats) and Query Inf
 | | **Waiting on OSDs** | List of OSDs that are delaying the scrub (Key for debugging stuck scrubs). |
 
 ## 4. Sample Output
+
 ```bash
 Fri Jan 16 02:07:20 AM UTC 2026
 Enter PG ID: 40.bec
