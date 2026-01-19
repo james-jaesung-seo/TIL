@@ -54,6 +54,19 @@ The output is categorized into three logical sections: General Status, Scrubber 
 | | **Object Count** | Total number of objects known to the PG metadata. |
 | | **Last Clean Epoch** | The last map epoch version where the PG was fully clean. |
 
+| Section | Field | Description |
+| :--- | :--- | :--- |
+| **PG Dump Info** | **PGID** | The target Placement Group ID entered (e.g., `40.bec`). |
+| | **State** | Current state of the PG (e.g., `active+clean`, `scrubbing`). |
+| | **Objects** | Total number of objects stored in this PG. |
+| | **Scrubbed** | Number of objects verified so far in the current cycle. |
+| | **Progress** | Scrubbing progress percentage (`Scrubbed` / `Objects` * 100). |
+| | **Last Scrub** | Timestamp of the last successfully completed scrub session. |
+| | **Schedule** | Next scheduled scrub time or queue status (e.g., `queued for scrub`). |
+| **PG Query Info** | **Acting Primary** | The OSD ID currently responsible for coordinating the scrub. |
+| | **Scrub Active** | `true` if the scrubber is actively running, `false` otherwise. |
+| | **Waiting on OSDs** | List of OSDs that are delaying the scrub (Key for debugging stuck scrubs). |
+
 ## 4. Sample Output
 
 ```bash
