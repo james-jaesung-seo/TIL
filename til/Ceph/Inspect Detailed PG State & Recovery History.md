@@ -5,7 +5,6 @@ public: true
 
 ## 1. Overview
 This script executes a deep inspection of a specific Placement Group (PG) using the internal query map. Unlike general stats, this command retrieves the detailed JSON representation of the PG to provide insight into:
-
 * **OSD Mapping:** Visualizes Up Set (CRUSH mapping) vs Acting Set (Actual IO handlers).
 * **Scrubber Internals:** Checks specific scrubber states and waiting lists.
 * **Recovery Context:** Tracks the current recovery machine state (e.g., Started/Primary/Active) and history (Last Clean Epoch).
