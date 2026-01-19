@@ -1,18 +1,16 @@
 ---
-title: "Snippet] Inspect Detailed PG State & Recovery History"
+title: "Snippet] Inspect Detailed PG State-Recovery History"
 public: true
 ---
 
 ## 1. Overview
 This script executes a deep inspection of a specific Placement Group (PG) using the internal query map. Unlike general stats, this command retrieves the detailed JSON representation of the PG to provide insight into:
 
-OSD Mapping: Visualizes Up Set (CRUSH mapping) vs Acting Set (Actual IO handlers).
+* **OSD Mapping:** Visualizes Up Set (CRUSH mapping) vs Acting Set (Actual IO handlers).
+* **Scrubber Internals:** Checks specific scrubber states and waiting lists.
+* **Recovery Context:** Tracks the current recovery machine state (e.g., Started/Primary/Active) and history (Last Clean Epoch).
 
-Scrubber Internals: Checks specific scrubber states and waiting lists.
-
-Recovery Context: Tracks the current recovery machine state (e.g., Started/Primary/Active) and history (Last Clean Epoch).
-
-Note: This script requires jq and sudo privileges to parse the raw Ceph query output.
+> **Note:** This script requires `jq` and `sudo` privileges to parse the raw Ceph query output.
 
 ## 2. One-Liner Command
 Run the following command and enter the target **PG ID** (e.g., `40.bec`) when prompted.
