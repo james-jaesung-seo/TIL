@@ -16,21 +16,24 @@ Run the following command and enter the target **PG ID** (e.g., `40.bec`) when p
 
 ```bash
 read -p "Enter PG ID: " pgid && \
-sudo ceph pg "$pgid" query --format=json | jq -r '
-"--- PG Status ---",
-"State:\t\t\(.state)",
-"Up OSDs:\t\t\(.up)",
-"Acting OSDs:\t\t\(.acting)",
-"Primary OSD:\t\tosd.\(.acting_primary)",
-"\n--- Scrubber Status ---",
-"Scrub Active:\t\t\(.scrubber.active)",
-"Scrub State:\t\t\(.scrubber.state)",
-"Waiting on OSDs:\t\(.scrubber.waiting_on_whom // [])",
-"\n--- Recovery & History ---",
-"Recovery State:\t\t\(.recovery_state[0].name // "N/A")",
-"  Enter Time:\t\t\(.recovery_state[0].enter_time // "N/A")",
-"Object Count:\t\t\(.info.stats.stat_sum.num_objects)",
-"Last Clean Epoch:\t\(.last_clean_epoch // "N/A")"
+sudo ceph pg "$pgid" query --format=json | \
+jq -r '
+  "--- PG Status ---",
+  "State:\t\t\(.state)",
+  "Up OSDs:\t\t\(.up)",
+  "Acting OSDs:\t\t\(.acting)",
+  "Primary OSD:\t\tosd.\(.acting_primary)",
+
+  "\n--- Scrubber Status ---",
+  "Scrub Active:\t\t\(.scrubber.active)",
+  "Scrub State:\t\t\(.scrubber.state)",
+  "Waiting on OSDs:\t\(.scrubber.waiting_on_whom // [])",
+
+  "\n--- Recovery & History ---",
+  "Recovery State:\t\t\(.recovery_state[0].name // "N/A")",
+  "  Enter Time:\t\t\(.recovery_state[0].enter_time // "N/A")",
+  "Object Count:\t\t\(.info.stats.stat_sum.num_objects)",
+  "Last Clean Epoch:\t\(.last_clean_epoch // "N/A")"
 '
 ```
 
