@@ -11,7 +11,6 @@
 
 ## linux
 - [Automatic OpenVPN Tunnel Recovery Procedure (Generic)](til/linux/Automatic-OpenVPN-Tunnel-Recovery-Procedure.md)
-- [Wan0 SSH Direct Access (Bypass OpenVPN)](til/linux/Wan0-SSH-Direct-Access-Bypass-OpenVPN.md)
 
 ---
-*Last updated: Sat May 23 19:27:45 UTC 2026*
+*Last updated: Sat May 23 19:34:21 UTC 2026*
