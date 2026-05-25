@@ -11,6 +11,7 @@
 
 ## linux
 - [Automatic OpenVPN Tunnel Recovery Procedure (Generic)](til/linux/Automatic-OpenVPN-Tunnel-Recovery-Procedure.md)
+- [Unattended-Upgrades Judgement One-Pager](til/linux/unattended-upgrades-judgement-onepager.md)
 
 ---
-*Last updated: Sat May 23 19:34:21 UTC 2026*
+*Last updated: Mon May 25 16:29:34 UTC 2026*
